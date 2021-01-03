@@ -4,7 +4,7 @@
 
 Some fast, non-cryptographic PRNG sources, in three variants:
 
-- **Plain** - the basic implementation. Fastest, but can not be used concurrently.
+- **Plain** - the basic implementation. Fastest, but can not be used concurrently without external synchronization.
 - **Atomic** - implementation using atomic operations. Non-locking, can be used concurrently, but a bit slower (especially at high concurrency).
 - **Sharded** - implementation using per-thread (P) sharding. Non-locking, can be used concurrently, fast (even at high concurrency), but does not support explicit seeding.
 
