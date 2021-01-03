@@ -54,6 +54,10 @@ Sharded variants detect the value of `GOMAXPROCS` when they are instantiated (wi
 
 The sharded variant uses more memory for the state than the other variants: in general it uses at least `GOMAXPROCS` * 64 bytes. This is done to avoid false sharing of cachelines between shards.
 
+## License
+
+[MIT](LICENSE)
+
 ---
 
 <sup>1</sup> there is no atomic variant for Xoshiro256** because its large state is not amenable to a performant atomic implementation.
