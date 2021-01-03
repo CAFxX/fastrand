@@ -1,6 +1,6 @@
 # fastrand
 
-[![Go Report](https://goreportcard.com/badge/github.com/CAFxX/fastrand)](https://goreportcard.com/report/github.com/CAFxX/fastrand) [![Go Reference](https://pkg.go.dev/badge/github.com/CAFxX/fastrand.svg)](https://pkg.go.dev/github.com/CAFxX/fastrand) :warning: API is not stable yet.
+[![Go Report](https://goreportcard.com/badge/github.com/CAFxX/fastrand)](https://goreportcard.com/report/github.com/CAFxX/fastrand) [![Coverage](https://gocover.io/_badge/github.com/CAFxX/fastrand)](https://gocover.io/github.com/CAFxX/fastrand) [![Go Reference](https://pkg.go.dev/badge/github.com/CAFxX/fastrand.svg)](https://pkg.go.dev/github.com/CAFxX/fastrand) :warning: API is not stable yet.
 
 Some fast, non-cryptographic PRNG sources, in three variants:
 
