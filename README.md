@@ -42,13 +42,13 @@ Tests run on a `Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz` with Turbo Boost disa
 
 ### Atomic variant
 
-The atomic variant currently relies on `unsafe` to improve the performance of its CAS loops. It does so by calling the unexported `procyield` function in package `runtime`. This dependency will be removed in a future release.
+The atomic variant currently relies on `unsafe` to improve the performance of its CAS loops. It does so by calling the unexported `procyield` function in package `runtime`. This dependency will be removed in a future release. Usage of `unsafe` can be disabled by setting the `fastrand_nounsafe` build tag, at the cost of lower performance.
 
 The state of the atomic variants is not padded/aligned to fill the cacheline: if needed users should pad the structure to avoid false sharing of the cacheline.
 
 ### Sharded variant
 
-The sharded variant relies on `unsafe` to implement sharding. It does so by calling the unexported `procPin` and `procUnpin` functions in package `runtime`. These functions are used by other packages (e.g. `sync`) for the same purpose, so they are unlikely to disappear/change.
+The sharded variant relies on `unsafe` to implement sharding. It does so by calling the unexported `procPin` and `procUnpin` functions in package `runtime`. These functions are used by other packages (e.g. `sync`) for the same purpose, so they are unlikely to disappear/change. Usage of `unsafe` can be disabled by setting the `fastrand_nounsafe` build tag, at the cost of lower performance.
 
 Sharded variants detect the value of `GOMAXPROCS` when they are instantiated (with `NewShardedXxx`). If `GOMAXPROCS` is increased after a sharded PRNG is instantiated it will yield suboptimal performance, as it may dynamically fallback to the corresponding atomic variant.
 

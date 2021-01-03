@@ -42,7 +42,7 @@ func (r *ShardedSplitMix64) Uint64() uint64 {
 	l := len(r.states) // if r is nil, panic before procPin
 	id := procPin()
 
-	if l <= id {
+	if fastrand_nounsafe || l <= id {
 		procUnpin()
 		return r.fallback.Uint64()
 	}

@@ -42,7 +42,7 @@ func (r *ShardedXoshiro256StarStar) Uint64() uint64 {
 	l := len(r.states) // if r is nil, panic before procPin
 	id := procPin()
 
-	if l <= id {
+	if fastrand_nounsafe || l <= id {
 		procUnpin()
 		r.fallbackMutex.Lock()
 		n := r.fallback.Uint64()

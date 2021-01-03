@@ -11,7 +11,7 @@ import (
 // The zero value is a valid state, but it uses a static, all zero seed: use NewShardedPCG to instantiate a ShardedPCG with a random seed.
 type ShardedPCG struct {
 	states   []paddedPCG
-	fallback PCG
+	fallback AtomicPCG
 }
 
 type paddedPCG struct {
@@ -40,7 +40,7 @@ func (p *ShardedPCG) Uint32() uint32 {
 	l := len(p.states) // if p is nil, panic before procPin
 	id := procPin()
 
-	if l <= id {
+	if fastrand_nounsafe || l <= id {
 		procUnpin()
 		return p.fallback.Uint32()
 	}

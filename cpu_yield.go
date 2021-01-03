@@ -1,3 +1,5 @@
+// +build !fastrand_nounsafe
+
 package fastrand
 
 import _ "unsafe"
