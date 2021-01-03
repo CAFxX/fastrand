@@ -16,6 +16,13 @@ PRNGs currently implemented:
 | [PCG-XSH-RR](https://www.pcg-random.org/)                    | 64           | 32            | 2<sup>64</sup>    | Plain, Atomic, Sharded |
 | [Xoshiro256**](http://prng.di.unimi.it/)                     | 256          | 64            | 2<sup>256</sup>-1 | Plain, Sharded         |
 
+Planned additions include:
+
+| Name                                      | State (bits) | Output (bits) | Period            | Variants                           |
+| ----------------------------------------- | ------------ | ------------- | ----------------- | ---------------------------------- |
+| [PCG-XSL-RR](https://www.pcg-random.org/) | 128          | 64            | 2<sup>128</sup>   | Plain, Atomic<sup>3</sup>, Sharded |
+| [xorshift128+](http://prng.di.unimi.it/)  | 128          | 64            | 2<sup>128</sup>-1 | Plain, Atomic<sup>3</sup>, Sharded |
+
 ## Performance
 
 Tests run on a `Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz` with Turbo Boost disabled. Lower is better.
@@ -65,3 +72,5 @@ Sharded variants do not allow explicit seeding since there is no easy way for a 
 <sup>1</sup> there is no atomic variant for Xoshiro256** because its large state is not amenable to a performant atomic implementation.
 
 <sup>2</sup> the `math/rand` atomic variant is not a pure non-locking implementation, since it is implemented by guarding a `rand.Rand` using a `sync.Mutex`.
+
+<sup>3</sup> only for platforms where 128 bit CAS primitives are supported.
