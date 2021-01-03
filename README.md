@@ -44,6 +44,8 @@ Tests run on a `Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz` with Turbo Boost disa
 
 The atomic variant currently relies on `unsafe` to improve the performance of its CAS loops. It does so by calling the unexported `procyield` function in package `runtime`. This dependency will be removed in a future release.
 
+The state of the atomic variants is not padded to avoid false sharing of cachelines: if needed users should ensure that the structure is padded correctly.
+
 ### Sharded variant
 
 The sharded variant relies on `unsafe` to implement sharding. It does so by calling the unexported `procPin` and `procUnpin` functions in package `runtime`. These functions are used by other packages (e.g. `sync`) for the same purpose, so they are unlikely to disappear/change.
