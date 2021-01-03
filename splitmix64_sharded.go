@@ -29,9 +29,9 @@ func NewShardedSplitMix64() *ShardedSplitMix64 {
 		states: make([]paddedSplitMix64, runtime.GOMAXPROCS(0)),
 	}
 	for i := range r.states {
-		r.states[i].Seed(seed())
+		r.states[i].Seed(Seed())
 	}
-	r.fallback.Seed(seed())
+	r.fallback.Seed(Seed())
 	return r
 }
 

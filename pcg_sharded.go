@@ -27,9 +27,9 @@ func NewShardedPCG() *ShardedPCG {
 		states: make([]paddedPCG, runtime.GOMAXPROCS(0)),
 	}
 	for i := range p.states {
-		p.states[i].Seed(seed())
+		p.states[i].Seed(Seed())
 	}
-	p.fallback.Seed(seed())
+	p.fallback.Seed(Seed())
 	return p
 }
 

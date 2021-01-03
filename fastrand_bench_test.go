@@ -9,7 +9,7 @@ import (
 func BenchmarkSplitMix64(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		var r SplitMix64
-		r.Seed(seed())
+		r.Seed(Seed())
 		for pb.Next() {
 			_ = r.Uint64()
 		}
@@ -18,7 +18,7 @@ func BenchmarkSplitMix64(b *testing.B) {
 
 func BenchmarkAtomicSplitMix64(b *testing.B) {
 	var r AtomicSplitMix64
-	r.Seed(seed())
+	r.Seed(Seed())
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			_ = r.Uint64()
@@ -38,7 +38,7 @@ func BenchmarkShardedSplitMix64(b *testing.B) {
 func BenchmarkPCG(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		var r PCG
-		r.Seed(seed())
+		r.Seed(Seed())
 		for pb.Next() {
 			_ = r.Uint32()
 		}
@@ -47,7 +47,7 @@ func BenchmarkPCG(b *testing.B) {
 
 func BenchmarkAtomicPCG(b *testing.B) {
 	var r AtomicPCG
-	r.Seed(seed())
+	r.Seed(Seed())
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			_ = r.Uint32()

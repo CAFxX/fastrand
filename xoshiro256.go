@@ -48,7 +48,7 @@ func (r *Xoshiro256StarStar) Seed(s0, s1, s2, s3 uint64) {
 
 func (r *Xoshiro256StarStar) safeSeed() {
 retry:
-	a, b, c, d := seed(), seed(), seed(), seed()
+	a, b, c, d := Seed(), Seed(), Seed(), Seed()
 	if a == 0 && b == 0 && c == 0 && d == 0 {
 		goto retry
 	}
