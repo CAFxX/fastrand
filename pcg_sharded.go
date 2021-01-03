@@ -7,7 +7,7 @@ import (
 
 // ShardedPCG implements the PCG-XSH-RR generator with per-thread (per-P) states.
 //
-// It is safe for concurrent use by multiple goroutines.
+// This generator is safe for concurrent use by multiple goroutines.
 // The zero value is a valid state, but it uses a static, all zero seed: use NewShardedPCG to instantiate a ShardedPCG with a random seed.
 type ShardedPCG struct {
 	states   []paddedPCG

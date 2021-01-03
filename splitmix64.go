@@ -1,7 +1,7 @@
 package fastrand
 
 // SplitMix64 implements the Java 8 SplittableRandom generator.
-// It is not safe for concurrent use by multiple goroutines.
+// This generator is not safe for concurrent use by multiple goroutines.
 // The zero value is a valid state: Seed() can be called to set a custom seed.
 type SplitMix64 struct {
 	state uint64

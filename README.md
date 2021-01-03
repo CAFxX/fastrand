@@ -44,7 +44,7 @@ Tests run on a `Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz` with Turbo Boost disa
 
 The atomic variant currently relies on `unsafe` to improve the performance of its CAS loops. It does so by calling the unexported `procyield` function in package `runtime`. This dependency will be removed in a future release.
 
-The state of the atomic variants is not padded to avoid false sharing of cachelines: if needed users should ensure that the structure is padded correctly.
+The state of the atomic variants is not padded/aligned to fill the cacheline: if needed users should pad the structure to avoid false sharing of the cacheline.
 
 ### Sharded variant
 

@@ -9,7 +9,7 @@ const cacheline = 64
 
 // ShardedSplitMix64 implements the Java 8 SplittableRandom generator with per-thread (per-P) states.
 //
-// It is safe for concurrent use by multiple goroutines.
+// This generator is safe for concurrent use by multiple goroutines.
 // The zero value is a valid state, but it uses a static, all zero seed: use NewShardedSplitMix64 to instantiate a ShardedSplitMix64 with a random seed.
 type ShardedSplitMix64 struct {
 	states   []paddedSplitMix64

@@ -5,7 +5,7 @@ import (
 )
 
 // PCG implements the PCG-XSH-RR generator.
-// It is not safe for concurrent use by multiple goroutines.
+// This generator is not safe for concurrent use by multiple goroutines.
 // The zero value is a valid state: Seed() can be called to set a custom seed.
 type PCG struct {
 	state uint64

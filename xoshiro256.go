@@ -4,7 +4,7 @@ import "math/bits"
 
 // Xoshiro256StarStar implements the Xoshiro256** PRNG.
 //
-// It is not safe for concurrent use by multiple goroutines.
+// This generator is not safe for concurrent use by multiple goroutines.
 // The zero value is not a valid state: Seed() must be called
 // before generating random numbers.
 type Xoshiro256StarStar struct {
@@ -15,6 +15,9 @@ type Xoshiro256StarStar struct {
 //
 // This function is not safe for concurrent use by multiple goroutines.
 func (r *Xoshiro256StarStar) Uint64() uint64 {
+	// TODO: this function has, unfortunately, an inline cost of 81.
+	// It would be ideal, especially for the sharded variant, if it was inlineable.
+
 	result := bits.RotateLeft64(r.state[1]*5, 7) * 9
 
 	t := r.state[1] << 17

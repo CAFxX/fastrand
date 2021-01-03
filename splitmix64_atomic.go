@@ -6,7 +6,7 @@ import (
 
 // AtomicSplitMix64 implements the Java 8 SplittableRandom generator with atomic state updates.
 //
-// It is safe for concurrent use by multiple goroutines.
+// This generator is safe for concurrent use by multiple goroutines.
 // The zero value is a valid state: Seed() can be called to set a custom seed.
 type AtomicSplitMix64 struct {
 	SplitMix64

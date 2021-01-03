@@ -8,7 +8,7 @@ import (
 
 // ShardedXoshiro256StarStar implements the Xoshiro256** PRNG with per-thread (per-P) states.
 //
-// It is safe for concurrent use by multiple goroutines.
+// This generator is safe for concurrent use by multiple goroutines.
 // The zero value is not a valid state: use NewShardedXoshiro256StarStar to construct a valid instance.
 // Increasing the value of GOMAXPROCS after instantiation will likely yield sub-optimal performance.
 type ShardedXoshiro256StarStar struct {
