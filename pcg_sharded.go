@@ -27,7 +27,7 @@ func NewShardedPCG() *ShardedPCG {
 }
 
 func (p *ShardedPCG) Uint32() uint32 {
-	l := len(p.states)
+	l := len(p.states) // if p is nil, panic before procPin
 	id := procPin()
 
 	if l <= id {

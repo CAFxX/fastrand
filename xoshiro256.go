@@ -2,10 +2,16 @@ package fastrand
 
 import "math/bits"
 
+// Xoshiro256StarStar implements the Xoshiro256** PRNG.
+// It is not safe for concurrent use by multiple goroutines.
+// The zero value is not a valid state: Seed() must be called
+// before generating random numbers.
 type Xoshiro256StarStar struct {
 	state [4]uint64
 }
 
+// Uint64 returns a random uint64.
+// It is not safe for concurrent use by multiple goroutines.
 func (r *Xoshiro256StarStar) Uint64() uint64 {
 	result := bits.RotateLeft64(r.state[1]*5, 7) * 9
 
@@ -23,6 +29,8 @@ func (r *Xoshiro256StarStar) Uint64() uint64 {
 	return result
 }
 
+// Seed sets the seed for the generator.
+// It is not safe for concurrent use by multiple goroutines.
 func (r *Xoshiro256StarStar) Seed(s0, s1, s2, s3 uint64) {
 	r.state[0] = s0
 	r.state[1] = s1
