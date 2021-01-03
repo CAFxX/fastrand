@@ -1,7 +1,6 @@
 package fastrand
 
 import (
-	"math/bits"
 	"sync/atomic"
 )
 
@@ -17,7 +16,9 @@ type AtomicPCG struct {
 //
 // This function is safe for concurrent use by multiple goroutines.
 func (r *AtomicPCG) Seed(s uint64) {
-	atomic.StoreUint64(&r.state, (s+pcgIncr)*pcgMult+pcgIncr)
+	var t PCG
+	t.Seed(s)
+	atomic.StoreUint64(&r.state, t.state)
 }
 
 // Uint32 returns a random uint32.
@@ -26,12 +27,12 @@ func (r *AtomicPCG) Seed(s uint64) {
 func (r *AtomicPCG) Uint32() uint32 {
 	i := uint32(0)
 	for {
-		x := atomic.LoadUint64(&r.state)
-		new := x*pcgMult + pcgIncr
-		if atomic.CompareAndSwapUint64(&r.state, x, new) {
-			x = x ^ (x >> 18)
-			count := x >> 59
-			return bits.RotateLeft32((uint32)(x>>27), (int)(32-count))
+		old := atomic.LoadUint64(&r.state)
+		var t PCG
+		t.state = old
+		n := t.Uint32()
+		if atomic.CompareAndSwapUint64(&r.state, old, t.state) {
+			return n
 		}
 		i += 30
 		cpuYield(i)

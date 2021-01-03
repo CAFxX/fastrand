@@ -16,7 +16,9 @@ type AtomicSplitMix64 struct {
 //
 // This function is safe for concurrent use by multiple goroutines.
 func (r *AtomicSplitMix64) Seed(s uint64) {
-	atomic.StoreUint64(&r.state, s)
+	var t SplitMix64
+	t.Seed(s)
+	atomic.StoreUint64(&r.state, t.state)
 }
 
 // Uint64 returns a random uint64.
