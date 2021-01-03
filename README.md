@@ -1,5 +1,7 @@
 # fastrand
 
+[![Go Report](https://goreportcard.com/badge/github.com/CAFxX/fastrand)](https://goreportcard.com/report/github.com/CAFxX/fastrand) [![Go Reference](https://pkg.go.dev/badge/github.com/CAFxX/fastrand.svg)](https://pkg.go.dev/github.com/CAFxX/fastrand) :warning: API is not stable yet.
+
 Some fast, non-cryptographic PRNG sources, in three variants:
 
 - **Plain** - the basic implementation. Fastest, but can not be used concurrently.
@@ -13,8 +15,6 @@ PRNGs currently implemented:
 | [SplitMix64](https://dl.acm.org/doi/10.1145/2714064.2660195) | 64           | 64            | 2<sup>64</sup>    | Plain, Atomic, Sharded |
 | [PCG-XSH-RR](https://www.pcg-random.org/)                    | 64           | 32            | 2<sup>64</sup>    | Plain, Atomic, Sharded |
 | [Xoshiro256**](http://prng.di.unimi.it/)                     | 256          | 64            | 2<sup>256</sup>-1 | Plain, Sharded         |
-
-[![Go Reference](https://pkg.go.dev/badge/github.com/CAFxX/fastrand.svg)](https://pkg.go.dev/github.com/CAFxX/fastrand) :warning: API is not stable yet.
 
 ## Performance
 
