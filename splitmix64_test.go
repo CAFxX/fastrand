@@ -38,7 +38,11 @@ func TestShardedSplitMix64(t *testing.T) {
 	r := NewShardedSplitMix64()
 	id := procPin()
 	defer procUnpin()
-	r.states[id].Seed(1)
+	if fastrand_nounsafe {
+		r.fallback.Seed(1)
+	} else {
+		r.states[id].Seed(1)
+	}
 	for i, e := range expSplitMix64 {
 		if g := r.Uint64(); g != e {
 			t.Errorf("i=%d, expected=%x, got=%x", i, e, g)

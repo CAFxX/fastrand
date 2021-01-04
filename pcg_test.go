@@ -38,7 +38,11 @@ func TestShardedPCG(t *testing.T) {
 	r := NewShardedPCG()
 	id := procPin()
 	defer procUnpin()
-	r.states[id].Seed(1)
+	if fastrand_nounsafe {
+		r.fallback.Seed(1)
+	} else {
+		r.states[id].Seed(1)
+	}
 	for i, e := range expPCG {
 		if g := r.Uint32(); g != e {
 			t.Errorf("i=%d, expected=%x, got=%x", i, e, g)

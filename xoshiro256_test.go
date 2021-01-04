@@ -28,7 +28,11 @@ func TestShardedXoshiro256StarStar(t *testing.T) {
 	r := NewShardedXoshiro256StarStar()
 	id := procPin()
 	defer procUnpin()
-	r.states[id].Seed(1, 0, 0, 0)
+	if fastrand_nounsafe {
+		r.fallback.Seed(1, 0, 0, 0)
+	} else {
+		r.states[id].Seed(1, 0, 0, 0)
+	}
 	for i, e := range expXoroshiro {
 		if g := r.Uint64(); g != e {
 			t.Errorf("i=%d, expected=%x, got=%x", i, e, g)
