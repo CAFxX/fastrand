@@ -31,9 +31,12 @@ jobs:
 
     - name: Build
       run: go build -v ./...
-
-    - name: Test
+  
+    - name: Test (unsafe)
       run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
-    
+      
+    - name: Test (nounsafe)
+      run: go test -v -race -tags=fastrand_nounsafe ./...
+
     - name: Codecov
       uses: codecov/codecov-action@v1.1.1
