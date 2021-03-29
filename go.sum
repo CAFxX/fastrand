@@ -1,2 +1,6 @@
+github.com/CAFxX/atomics v0.0.0-20190606154853-c2751b778050 h1:7nNZXKXPKcT7jue6O47Zr0/0UntCSfT9WKDwsmpJkmU=
+github.com/CAFxX/atomics v0.0.0-20190606154853-c2751b778050/go.mod h1:Z5srqesSV5Qmbe3W1zEM2FvCiaxfv01xR5vRJW/URFY=
+github.com/klauspost/cpuid/v2 v2.0.6 h1:dQ5ueTiftKxp0gyjKSx5+8BtPWkyQbd95m8Gys/RarI=
+github.com/klauspost/cpuid/v2 v2.0.6/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
 github.com/valyala/fastrand v1.0.0 h1:LUKT9aKer2dVQNUi3waewTbKV+7H17kvWFNKs2ObdkI=
 github.com/valyala/fastrand v1.0.0/go.mod h1:HWqCzkrkg6QXT8V2EXWvXCoow7vLwOFN002oeRzjapQ=
