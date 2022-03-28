@@ -27,30 +27,28 @@ func TestAtomicPCGXSLRR(t *testing.T) {
 	}
 }
 
-/*
-func TestShardedPCGFallback(t *testing.T) {
-	var r ShardedPCG // no shards created
-	r.fallback.Seed(1)
-	for i, e := range expPCG {
-		if g := r.Uint32(); g != e {
+func TestShardedPCGXSLRRFallback(t *testing.T) {
+	var r ShardedPCGXSLRR // no shards created
+	r.fallback.Seed(1, 2)
+	for i, e := range expPCGXSLRR {
+		if g := r.Uint64(); g != e {
 			t.Errorf("i=%d, expected=%x, got=%x", i, e, g)
 		}
 	}
 }
 
-func TestShardedPCG(t *testing.T) {
-	r := NewShardedPCG()
+func TestShardedPCGXSLRR(t *testing.T) {
+	r := NewShardedPCGXSLRR()
 	id := procPin()
 	defer procUnpin()
 	if fastrand_nounsafe {
-		r.fallback.Seed(1)
+		r.fallback.Seed(1, 2)
 	} else {
-		r.states[id].Seed(1)
+		r.states[id].Seed(1, 2)
 	}
-	for i, e := range expPCG {
-		if g := r.Uint32(); g != e {
+	for i, e := range expPCGXSLRR {
+		if g := r.Uint64(); g != e {
 			t.Errorf("i=%d, expected=%x, got=%x", i, e, g)
 		}
 	}
 }
-*/

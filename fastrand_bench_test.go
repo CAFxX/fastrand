@@ -86,6 +86,15 @@ func BenchmarkAtomicPCGXSLRR(b *testing.B) {
 	})
 }
 
+func BenchmarkShardedPCGXSLRR(b *testing.B) {
+	r := NewShardedPCGXSLRR()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			use64(r.Uint64())
+		}
+	})
+}
+
 func BenchmarkXoshiro256StarStar(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		r := &Xoshiro256StarStar{}
