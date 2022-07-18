@@ -13,18 +13,18 @@ Some fast, non-cryptographic PRNG sources, in three variants:
 
 PRNGs currently implemented:
 
-| Name                                                         | State (bits) | Output (bits) | Period            | Variants               |
-| ------------------------------------------------------------ | ------------ | ------------- | ----------------- | ---------------------- |
-| [SplitMix64](https://dl.acm.org/doi/10.1145/2714064.2660195) | 64           | 64            | 2<sup>64</sup>    | Plain, Atomic, Sharded |
-| [PCG-XSH-RR](https://www.pcg-random.org/)                    | 64           | 32            | 2<sup>64</sup>    | Plain, Atomic, Sharded |
-| [Xoshiro256**](http://prng.di.unimi.it/)                     | 256          | 64            | 2<sup>256</sup>-1 | Plain, Sharded         |
+| Name                                                         | State (bits) | Output (bits) | Period            | Variants                           |
+| ------------------------------------------------------------ | ------------ | ------------- | ----------------- | ---------------------------------- |
+| [SplitMix64](https://dl.acm.org/doi/10.1145/2714064.2660195) | 64           | 64            | 2<sup>64</sup>    | Plain, Atomic, Sharded             |
+| [PCG-XSH-RR](https://www.pcg-random.org/)                    | 64           | 32            | 2<sup>64</sup>    | Plain, Atomic, Sharded             |
+| [PCG-XSL-RR](https://www.pcg-random.org/)                    | 128          | 64            | 2<sup>128</sup>   | Plain, Atomic<sup>3</sup>, Sharded |
+| [Xoshiro256**](http://prng.di.unimi.it/)                     | 256          | 64            | 2<sup>256</sup>-1 | Plain, Sharded                     |
 
 Planned additions include:
 
-| Name                                      | State (bits) | Output (bits) | Period            | Variants                           |
-| ----------------------------------------- | ------------ | ------------- | ----------------- | ---------------------------------- |
-| [PCG-XSL-RR](https://www.pcg-random.org/) | 128          | 64            | 2<sup>128</sup>   | Plain, Atomic<sup>3</sup>, Sharded |
-| [xorshift128+](http://prng.di.unimi.it/)  | 128          | 64            | 2<sup>128</sup>-1 | Plain, Atomic<sup>3</sup>, Sharded |
+| Name                                     | State (bits) | Output (bits) | Period            | Variants                           |
+| ---------------------------------------- | ------------ | ------------- | ----------------- | ---------------------------------- |
+| [xorshift128+](http://prng.di.unimi.it/) | 128          | 64            | 2<sup>128</sup>-1 | Plain, Atomic<sup>3</sup>, Sharded |
 
 ## Performance
 
@@ -76,4 +76,4 @@ Sharded variants do not allow explicit seeding since there is no easy way for a 
 
 <sup>2</sup> the `math/rand` atomic variant is not a pure non-locking implementation, since it is implemented by guarding a `rand.Rand` using a `sync.Mutex`.
 
-<sup>3</sup> only for platforms where 128 bit CAS primitives are supported.
+<sup>3</sup> only efficient on platforms that provide a 128 bit CAS primitive.

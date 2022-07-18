@@ -37,9 +37,9 @@ func BenchmarkShardedSplitMix64(b *testing.B) {
 	})
 }
 
-func BenchmarkPCG(b *testing.B) {
+func BenchmarkPCGXSHRR(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
-		var r PCG
+		var r PCGXSHRR
 		r.Seed(Seed())
 		for pb.Next() {
 			use32(r.Uint32())
@@ -47,8 +47,8 @@ func BenchmarkPCG(b *testing.B) {
 	})
 }
 
-func BenchmarkAtomicPCG(b *testing.B) {
-	var r AtomicPCG
+func BenchmarkAtomicPCGXSHRR(b *testing.B) {
+	var r AtomicPCGXSHRR
 	r.Seed(Seed())
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
@@ -57,8 +57,8 @@ func BenchmarkAtomicPCG(b *testing.B) {
 	})
 }
 
-func BenchmarkShardedPCG(b *testing.B) {
-	r := NewShardedPCG()
+func BenchmarkShardedPCGXSHRR(b *testing.B) {
+	r := NewShardedPCGXSHRR()
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			use32(r.Uint32())
