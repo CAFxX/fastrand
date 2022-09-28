@@ -8,8 +8,8 @@ import (
 //
 // This generator is safe for concurrent use by multiple goroutines.
 // The zero value is a valid state: Seed() can be called to set a custom seed.
-type AtomicPCGXSHRR struct {
-	PCGXSHRR
+type AtomicPCG struct {
+	state atomic.Uint64
 }
 
 // Seed initializes the state with the provided seed.
@@ -18,7 +18,7 @@ type AtomicPCGXSHRR struct {
 func (r *AtomicPCGXSHRR) Seed(s uint64) {
 	var t PCGXSHRR
 	t.Seed(s)
-	atomic.StoreUint64(&r.state, t.state)
+	r.state.Store(t.state)
 }
 
 // Uint32 returns a random uint32.
@@ -27,11 +27,11 @@ func (r *AtomicPCGXSHRR) Seed(s uint64) {
 func (r *AtomicPCGXSHRR) Uint32() uint32 {
 	i := uint32(0)
 	for {
-		old := atomic.LoadUint64(&r.state)
+		old := r.state.Load()
 		var t PCGXSHRR
 		t.state = old
 		n := t.Uint32()
-		if atomic.CompareAndSwapUint64(&r.state, old, t.state) {
+		if r.state.CompareAndSwap(old, t.state) {
 			return n
 		}
 		i += 30
