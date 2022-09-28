@@ -1,4 +1,4 @@
-//go:build !amd64.v2
+//go:build !amd64v2
 
 package fastrand
 

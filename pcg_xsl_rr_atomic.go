@@ -4,26 +4,22 @@ import (
 	"unsafe"
 )
 
-// AtomicPCG implements the PCG-XSH-RR generator with atomic state updates.
+// AtomicPCGXSLRR implements the PCG-XSL-RR generator with atomic state updates.
 //
 // This generator is safe for concurrent use by multiple goroutines.
 // The zero value is a valid state: Seed() can be called to set a custom seed.
 type AtomicPCGXSLRR struct {
-	state [2 + 1]uint64
+	state [4]uint64
 }
 
 func (r *AtomicPCGXSLRR) pstate() *[2]uint64 {
-	if uintptr(unsafe.Pointer(&r.state[0]))%16 == 0 {
-		return (*[2]uint64)(unsafe.Pointer(&r.state[0]))
-	}
-	return (*[2]uint64)(unsafe.Pointer(&r.state[1]))
+	ptr := (uintptr(unsafe.Pointer(&r.state[0]))+15)&^15 + 0
+	return (*[2]uint64)(unsafe.Pointer(ptr))
 }
 
 func (r *AtomicPCGXSLRR) plock() *uint64 {
-	if uintptr(unsafe.Pointer(&r.state[0]))%16 == 0 {
-		return &r.state[2]
-	}
-	return &r.state[0]
+	ptr := (uintptr(unsafe.Pointer(&r.state[0]))+15)&^15 + 16
+	return (*uint64)(unsafe.Pointer(ptr))
 }
 
 // Seed initializes the state with the provided seed.
